@@ -21,7 +21,7 @@ $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbna
 try{
 	$dbh = new PDO($dsn, $db['user'], $db['pass'], array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 
-	$sql = "SELECT * FROM gbanlist WHERE approval = 'true'";
+	$sql = "SELECT * FROM gbanlist";
 	$statement = $dbh -> query($sql);
 	
 
