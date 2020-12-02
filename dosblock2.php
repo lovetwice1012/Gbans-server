@@ -11,7 +11,7 @@ $counts1 = glob($targetDir1. DIRECTORY_SEPARATOR . "*.*");
 //echo count($counts);
 
 $cktimes = file_get_contents('./blocktime', false, null);
-if(time() - 1800 >= $cktimes){
+if(time() - 86400 >= $cktimes){
 unlink("./blocktime");
 file_put_contents("./blocktime", time() . PHP_EOL, FILE_APPEND | LOCK_EX);
 $dir = "./nowblocking/";
@@ -30,8 +30,8 @@ $file = "./log/".$_SERVER["REMOTE_ADDR"] ;
 file_put_contents($file, time() . PHP_EOL, FILE_APPEND | LOCK_EX);
 
 $lineSize = 11;
-$maxRow = 5;
-$limitTime = 1800;
+$maxRow = 101;
+$limitTime = 86400;
 $readByte = $lineSize * $maxRow;
 $readContent = file_get_contents($file, false, null, filesize($file) - $readByte);
 $lines = explode(PHP_EOL, $readContent);
