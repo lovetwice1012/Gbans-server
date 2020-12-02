@@ -22,13 +22,7 @@ $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbna
 $pdo = new PDO($dsn, $db['user'], $db['pass'], array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 try{
 
-$stmt = $pdo->prepare("SELECT * FROM gbanuban WHERE name = ?");
-$stmt->execute(array($_POST['user']));
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
-if(count($result) > 0&& is_array($result)){
-echo "Access denied";
-exit;
-}
+
 
 $stmt = $pdo->prepare("SELECT * FROM gbanipban WHERE name = ?");
 $stmt->execute(array($_POST['IP']));
@@ -38,13 +32,6 @@ echo "Access denied";
 exit;
 }
 
-$stmt = $pdo->prepare("SELECT * FROM gbanserverban WHERE name = ?");
-$stmt->execute(array($_POST['server']));
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
-if(count($result) > 0&& is_array($result)){
-echo "Access denied";
-exit;
-}
 $stmt = $pdo->prepare('INSERT INTO `gbanipban`(`name`, `reason`,`user`,`ip`,`server`,`channel`) VALUES (:username, :reason, :user, :ip, :server, :channel)');
 $stmt->bindParam(':username', $_POST["banip"], PDO::PARAM_STR);
 $stmt->bindParam(':reason', $_POST["reason"], PDO::PARAM_STR);
